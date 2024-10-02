@@ -5,6 +5,7 @@ FROM $BASE_IMAGE as runtime-environment
 COPY requirements.txt /tmp/requirements.txt
 RUN python -m pip install -U "pip>=21.2"
 RUN pip install --no-cache-dir -r /tmp/requirements.txt && rm -f /tmp/requirements.txt
+RUN pip install kedro-datasets
 
 # add kedro user
 ARG KEDRO_UID=999
