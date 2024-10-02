@@ -1,0 +1,42 @@
+[build-system]
+requires = [ "setuptools",]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "drugs_data_pipeline"
+readme = "README.md"
+dynamic = [ "dependencies", "version",]
+
+[project.scripts]
+drugs-data-pipeline = "drugs_data_pipeline.__main__:main"
+
+[tool.kedro]
+package_name = "drugs_data_pipeline"
+project_name = "drugs-data-pipeline"
+kedro_init_version = "0.19.8"
+tools = [ "Testing", "Custom Logging",]
+example_pipeline = "False"
+source_dir = "src"
+
+[project.entry-points."kedro.hooks"]
+
+[tool.pytest.ini_options]
+addopts = "--cov-report term-missing --cov src/drugs_data_pipeline -ra"
+
+[tool.coverage.report]
+fail_under = 0
+show_missing = true
+exclude_lines = [ "pragma: no cover", "raise NotImplementedError",]
+
+[tool.setuptools.dynamic.dependencies]
+file = "requirements.txt"
+
+[tool.setuptools.dynamic.version]
+attr = "drugs_data_pipeline.__version__"
+
+[tool.setuptools.packages.find]
+where = [ "src",]
+namespaces = false
+
+[tool.kedro_telemetry]
+project_id = "6ffb29d27b8c477196cde14b9c70ef11"
