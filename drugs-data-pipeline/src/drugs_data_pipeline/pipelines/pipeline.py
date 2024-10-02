@@ -27,19 +27,19 @@ def create_pipeline(**kwargs) -> Pipeline:
             node(
                 func=transform_to_graph,
                 inputs=["preprocessed_drugs", "preprocessed_pubmed", "preprocessed_clinical_trials"],
-                outputs="output_graph",
+                outputs=["output_graph_nodes", "output_graph_relationships"],
                 name="transform_to_graph_node",
             ),
             node(
                 func=extract_journal_with_most_drugs,
-                inputs="output_graph",
+                inputs=["preprocessed_drugs", "preprocessed_pubmed", "preprocessed_clinical_trials"],
                 outputs="most_mentioning_journal",
                 name="journal_with_most_drugs_node",
             ),
             node(
                 func=load_to_json,
-                inputs="output_graph",
-                outputs="output_filepath",
+                inputs=["output_graph_nodes", "output_graph_relationships"],
+                outputs=["json_graph_nodes", "json_graph_relationships"],
                 name="load_json_node",
             ),
             node(

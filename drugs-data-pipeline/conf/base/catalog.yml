@@ -38,14 +38,34 @@ preprocessed_clinical_trials:
   type: pandas.CSVDataset
   filepath: data/02_intermediate/preprocessed_clinical_trials.csv
 
-output_graph:
-  type: MemoryDataset
+output_graph_relationships:
+  type: pandas.CSVDataset
+  filepath: data/02_intermediate/output_graph_relationships.csv
 
-output_filepath:
-  type: MemoryDataset
+output_graph_nodes:
+  type: pandas.CSVDataset
+  filepath: data/02_intermediate/output_graph_nodes.csv
 
 most_mentioning_journal:
-  type: MemoryDataset
+  type: pandas.JSONDataset
+  filepath: data/02_intermediate/most_mentioning_journal.json
+  save_args:
+    orient: records
+    indent: 4  # Optional: to pretty-print JSON
+
+json_graph_nodes:
+  type: pandas.JSONDataset
+  filepath: data/03_output/graph_nodes.json
+  save_args:
+    orient: records
+    indent: 4  # Optional: to pretty-print JSON
+
+json_graph_relationships:
+  type: pandas.JSONDataset
+  filepath: data/03_output/graph_relationships.json
+  save_args:
+    orient: records
+    indent: 4  # Optional: to pretty-print JSON
 
 # Résultats de l'analyse ad-hoc
 adhoc_json_1:

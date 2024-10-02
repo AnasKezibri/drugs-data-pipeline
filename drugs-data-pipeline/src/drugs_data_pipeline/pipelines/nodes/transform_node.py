@@ -182,18 +182,18 @@ def build_graph(drugs, pubmed, clinical_trials):
                 }
             })
 
-    return graphe
+    return graphe['nodes'], graphe['relationships']
 
 
 
 def transform_to_graph(preprocessed_drugs: pd.DataFrame, preprocessed_pubmed: pd.DataFrame, preprocessed_clinical_trials: pd.DataFrame) -> pd.DataFrame:
     """Transforme les données brutes en un graphe"""
     graphe = build_graph(preprocessed_drugs, preprocessed_pubmed, preprocessed_clinical_trials)
-    return graphe
+    return pd.Series(graphe[0]), pd.Series(graphe[1])
 
-def extract_journal_with_most_drugs(json_data):
-    from collections import defaultdict
-    nodes = json_data['nodes']
+def extract_journal_with_most_drugs(preprocessed_drugs: pd.DataFrame, preprocessed_pubmed: pd.DataFrame, preprocessed_clinical_trials: pd.DataFrame) -> pd.DataFrame:
+    graphe = build_graph(preprocessed_drugs, preprocessed_pubmed, preprocessed_clinical_trials)
+    nodes = graphe[0]
     drug_names = {}
     journal_names = {}
 
@@ -208,7 +208,7 @@ def extract_journal_with_most_drugs(json_data):
             journal_names[node['id']] = node['properties']['name']
     
     # Extraire les relations pour associer les médicaments aux journaux
-    relationships = json_data['relationships']
+    relationships = graphe[1]
     
     for rs in relationships:
         if rs['type'] == 'MENTIONED_IN':
@@ -224,11 +224,11 @@ def extract_journal_with_most_drugs(json_data):
 
     # Structurer la sortie pour ne retourner que le journal avec les médicaments mentionnés
     if most_mentioning_journal[0] is not None:
-        return [
+        return pd.Series([
             {
                 "most_mentioning_journal": most_mentioning_journal[0],
                 "mentioned_drugs": list(most_mentioning_journal[1])
             }
-        ]
+        ])
     
-    return []  # Retourne une liste vide si aucun journal n'est trouvé
+    return pd.Series([])  # Retourne une liste vide si aucun journal n'est trouvé
