@@ -57,8 +57,9 @@ def extract_preprocess_pubmed(pubmed_csv: pd.DataFrame, pubmed_json: pd.DataFram
     pubmed.replace('', np.nan, inplace=True)
     pubmed = pubmed.dropna(how='any')
 
-    pubmed['date'] = pd.to_datetime(pubmed['date'], infer_datetime_format=True)
-    pubmed['date'] = pubmed['date'].dt.strftime('%Y-%m-%d')
+    pubmed['date'] = pd.to_datetime(pubmed['date'], dayfirst=True, errors='coerce')
+
+    pubmed['date'] = pubmed['date'].dt.strftime('%d-%m-%Y')
 
     return pubmed
 
@@ -81,7 +82,8 @@ def extract_preprocess_clinical_trials(clinical_trials: pd.DataFrame) -> pd.Data
 
     clinical_trials = clinical_trials.applymap(remove_malformed_encoding)
     
-    clinical_trials['date'] = pd.to_datetime(clinical_trials['date'], infer_datetime_format=True)
-    clinical_trials['date'] = clinical_trials['date'].dt.strftime('%Y-%m-%d')
+    clinical_trials['date'] = pd.to_datetime(clinical_trials['date'], dayfirst=True, errors='coerce')
+
+    clinical_trials['date'] = clinical_trials['date'].dt.strftime('%d-%m-%Y')
     
     return clinical_trials
