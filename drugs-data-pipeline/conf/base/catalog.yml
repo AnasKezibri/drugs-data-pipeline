@@ -38,6 +38,15 @@ preprocessed_clinical_trials:
   type: pandas.CSVDataset
   filepath: data/02_intermediate/preprocessed_clinical_trials.csv
 
+output_graph:
+  type: MemoryDataset
+
+output_filepath:
+  type: MemoryDataset
+
+most_mentioning_journal:
+  type: MemoryDataset
+
 # Résultats de l'analyse ad-hoc
 adhoc_json_1:
   type: pandas.JSONDataset
