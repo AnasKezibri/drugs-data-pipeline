@@ -10,7 +10,7 @@ Avant de commencer, assurez-vous d'avoir les outils suivants installés sur votr
 2. **Docker** :
    - [Installer Docker](https://docs.docker.com/get-docker/)
 
-3. **Astro CLI** :
+3. **Astronomer (Astro CLI)** :
    - [Installer Astro CLI](https://www.astronomer.io/docs/astro/cli/install-cli)
 
 ## Étapes à suivre
