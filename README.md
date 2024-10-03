@@ -4,10 +4,13 @@
 
 Avant de commencer, assurez-vous d'avoir les outils suivants installés sur votre machine :
 
-1. **Docker** :
+1. **Git** :
+   - [Installer Git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git)
+   
+2. **Docker** :
    - [Installer Docker](https://docs.docker.com/get-docker/)
 
-2. **Astro CLI** :
+3. **Astro CLI** :
    - [Installer Astro CLI](https://www.astronomer.io/docs/astro/cli/install-cli)
 
 ## Étapes à suivre
