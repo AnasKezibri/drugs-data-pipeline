@@ -23,14 +23,24 @@ git clone https://github.com/AnasKezibri/drugs-data-pipeline.git
 cd drugs-data-pipeline/airflow-drugs-data-pipeline
 ```
 
-### 3. Construire l'image Docker du data pipeline ainsi que Airflow à l'aide d'Astronomer
+### 3. Construire l'image Docker du data pipeline et Airflow
 ```
 astro dev start
 ```
 
 ### 4. Accéder à Airflow
 Vous pouvez maintenant accéder à l'interface web d'Airflow à l'adresse suivante : http://localhost:8080 (User : admin, password : admin), puis déclencher le DAG drugs-data-pipeline.
-Les fichiers json de sortie sont disponible sous le dossier drugs-data-pipeline/airflow-drugs-data-pipeline/data/03_output.
+
+### 5. Accéder aux résultats du data pipeline
+Les fichiers JSON de sortie sont disponible dans le conteneur Docker du Scheduler d'Airflow, dans le dossier /data/03_output.
+Pour y accéder, lister les conteneur Docker pour récupérer le nom exacte du conteneur ensuite il faut l'ouvrir et lire les fichiers JSON.
+Voici la suite des commandes à suivre pour vérifier les fichiers JSON générés après l'exécution du DAG :
+```
+docker ps
+docker exec -it airflow-drugs-data-pipeline_99e5fd-scheduler-1 /bin/bash
+cd data/03_output
+ls -l
+```
 
 
 
