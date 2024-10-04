@@ -2,20 +2,20 @@
 
 ## table des matières
 
-### Spécifications Détaillées du Data Pipeline
+### Spécifications Détaillées
 
 #### [Description fonctionnelle](#description-fonctionnelle)
 
 #### [Description technique](#description-technique)
 
-### Guide d'Installation et d'Exécution du Data Pipeline
+### Guide d'Installation et d'Exécution
 
 #### [Prérequis](#prérequis)
 
 #### [Étapes à suivre](#étapes-à-suivre)
 
 
-# Spécifications Détaillées du Data Pipeline
+# Spécifications Détaillées
 
 ## Description fonctionnelle
 ### L'objectif principal du projet
@@ -104,7 +104,7 @@ Il comporte deux éléments principales :
 En définissant des nœuds séparément, on peut réutiliser ces fonctions dans différents pipelines ou d'autres parties du projet. Cela favorise la réutilisabilité et la modularité du code.
 * Le fichier pipeline.py intègre les entrées et sorties des nœuds, permettant ainsi de structurer le traitement des données de manière cohérente. Il fait appel aux datasets définits dans le fichier conf/base/catalog.yml pour gérer ces données d'entrée et de sortie.
 
-# Guide d'Installation et d'Exécution du Data Pipeline
+# Guide d'Installation et d'Exécution
 
 ## Prérequis
 
