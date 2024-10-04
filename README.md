@@ -52,7 +52,7 @@ Génération d'un fichier JSON qui présente une structure représentant les rel
 ### Organisation technique des fichiers du projet
 Dans cette partie, on va détailler les dossiers principaux du projet Python qui refléte la logique du pipeline décrite dans la partie précédente, ainsi que les autres éléments nécessaire pour géré le packaging, la dockirisation et l'orchestration du projet Python.
 ```
-my_kedro_project/
+drugs-data-pipeline/
 ├──.vis/
 ├──conf/
 ├──dags/
