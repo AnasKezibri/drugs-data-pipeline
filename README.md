@@ -100,6 +100,7 @@ Il comporte deux éléments principales :
   - extract_node.py : Extraction et préparation des données.
   - transform_node.py : Tockenisation des titres, construction d'une table d'association entre les médicaments, les journaux et les publications, puis ensuite contruire le graphe de liaison. On a aussi une fonction pour établir une analyse ad-hoc.
   - load_node.py : Chargement des données vers des fichiers JSON.
+
 En définissant des nœuds séparément, on peut réutiliser ces fonctions dans différents pipelines ou d'autres parties du projet. Cela favorise la réutilisabilité et la modularité du code.
 * Le fichier pipeline.py intègre les entrées et sorties des nœuds, permettant ainsi de structurer le traitement des données de manière cohérente. Il fait appel aux datasets définits dans le fichier conf/base/catalog.yml pour gérer ces données d'entrée et de sortie.
 
