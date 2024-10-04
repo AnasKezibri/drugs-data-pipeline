@@ -44,7 +44,7 @@ Implique des étapes comme :
 *  Le nettoyage des titres. Par exemple : supprimer les encodages mal formés d'une chaîne de caractères, écarter les titres contenant que des éspaces.
 ##### Transformation et Consolidation des données (Transform)
 * Tokenisation des titres : Identifier les mentions des médicaments dans les titres des publications. Cela nécessite de comparer les titres avec les noms de médicaments pour détecter des correspondances.
-* Construction d'une table d'association entre les médicaments, les journaux, les dates et les types de publications (PubMed ou Clinical Trials).
+* Construction d'une table d'association entre les médicaments, les journaux, les dates et les types de publications (PubMed ou Clinical Trials). Dans cette étape chaque type de nœud a besoin d'avoir une clé id. Les fichiers source fournissent des ids pour les nœuds Drug et Publication, mais pas pour Journal. Afin de remédier à ceci, j'ai créer une clé à partir du nom du journal pour des raisons de faciliter de lecture du JSON, le plus convenable c'est ode créer une clé incrémentale comme par exemple cette fournie pour les données PubMed.
 * Création d'un graphe de relations entre médicaments et journaux, avec les dates associées. L'idée est de modéliser les entités (médicaments, publications, journaux) sous forme de nœuds et leurs interactions comme des relations dans le graphe. Pour atteindre cette modélisation, j'ai opté pour une sortie sous forme d'un fichier JSON qui suit une logique de graphe compatible avec Neo4j (un système de gestion de base de données orienté graphes, cf. fichier pdf pour plus de détails sur le fichier JSON de sortie). Le résultat final permet de représenter les relations entre les médicaments et leurs mentions respectives dans les publications scientifiques , ainsi que dans les journaux associés à ces publications.
 ##### Sortie du fichier final (Load)
 Génération d'un fichier JSON qui présente une structure représentant les relations entre les médicaments et leurs mentions dans les publications et les journaux, avec les métadonnées correspondantes (date, type de publication).
@@ -87,8 +87,8 @@ Le dossier /data est subdivisé en plusieurs sous-dossiers, chacun correspondant
 * data/01_raw/ : contient les données brutes d'entrée (non transformées) à ingérez dans le pipeline.
 * data/02_intermediate/ : contient les données nettoyées, mais qui ne sont pas encore sous leur forme finale.
 * data/03_output/ : contient les données finales qui ont été transformées et sont prêtes à être utilisées dans des analyses. Trois fichiers JSON y sont disponibles :
-  - graph_nodes.json : les nœuds du graphe de liaison,
-  - graph_relationships.json : les relations entre ces nœuds,
+  - graph_nodes.json : les nœuds du graphe de liaison : Drug, Publication et Journal,
+  - graph_relationships.json : les relations entre ces nœuds: REFERENCE entre Drug et Publication, PUBLISHED_IN entre Publication et Journal, MENTIONED_IN entre Drug et Journal,
   - traitement_adhoc_1.json : l'analyse ad-hoc pour trouver le journal qui mentionne le plus de médicaments différents.
 ##### 4. Répertoire dist/
 Le dossier /dist est utilisé pour contenir les artefacts du projet, c'est-à-dire le projet sous forme de bibliothèque Python. On y trouve le fichier drugs_data_pipeline-0.1-py3-none-any.whl qui va nous servir par la suite pour déployer le pipeline sous forme d’un package Python réutilisable dans le projet Airflow airflow-drugs-data-pipeline.
